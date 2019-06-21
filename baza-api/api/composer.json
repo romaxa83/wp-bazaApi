@@ -1,0 +1,35 @@
+{
+    "name": "root/api",
+    "authors": [
+        {
+            "name": "Rodomano Roman",
+            "email": "romaxa83@ukr.net"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "ext-json": "^1.5",
+        "ext-mbstring": "^7.1",
+        "doctrine/migrations": "^1.8",
+        "doctrine/orm": "^2.6",
+        "monolog/monolog": "^1.23",
+        "slim/slim": "^3.11",
+        "symfony/console": "^4.1",
+        "symfony/dotenv": "^4.1",
+        "symfony/validator": "^4.1",
+        "zendframework/zend-config-aggregator": "^1.1",
+        "zendframework/zend-diactoros": "^2.0",
+        "psr/http-server-handler": "^1.0",
+        "psr/http-server-middleware": "^1.0"
+    },
+    "require-dev": {
+        "doctrine/data-fixtures": "^1.3",
+        "phpunit/phpunit": "^7.4",
+        "roave/security-advisories": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Api\\": "src"
+        }
+    }
+}
