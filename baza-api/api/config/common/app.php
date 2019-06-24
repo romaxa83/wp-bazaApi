@@ -6,6 +6,7 @@ use Api\Http\Action;
 use Api\Http\Middleware;
 use Api\Http\Validator\Validator;
 use Api\Model\NewBaza\Entity\NewBazaRepository;
+use Api\Model\OldBaza\Entity\OldBazaRepository;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Validator\Validation;
@@ -66,6 +67,30 @@ return [
     Action\NewBaza\DeleteAction::class => function(ContainerInterface $container) {
         return new Action\NewBaza\DeleteAction(
             $container->get(NewBazaRepository::class)
+        );
+    },
+
+    Action\OldBaza\AddAction::class => function(ContainerInterface $container) {
+        return new Action\OldBaza\AddAction(
+            $container->get(Api\Model\OldBaza\UseCase\Add\Handler::class)
+        );
+    },
+
+    Action\OldBaza\CheckAction::class => function(ContainerInterface $container) {
+        return new Action\OldBaza\CheckAction(
+            $container->get(OldBazaRepository::class)
+        );
+    },
+
+    Action\OldBaza\GetDataAction::class => function(ContainerInterface $container) {
+        return new Action\OldBaza\GetDataAction(
+            $container->get(OldBazaRepository::class)
+        );
+    },
+
+    Action\OldBaza\DeleteAction::class => function(ContainerInterface $container) {
+        return new Action\OldBaza\DeleteAction(
+            $container->get(OldBazaRepository::class)
         );
     }
 

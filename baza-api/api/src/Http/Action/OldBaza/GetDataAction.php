@@ -2,52 +2,57 @@
 
 declare(strict_types=1);
 
-namespace Api\Http\Action\NewBaza;
+namespace Api\Http\Action\OldBaza;
 
 use Api\Http\WrongUrlExceptionTrait;
-use Api\Model\NewBaza\Entity\NewBazaRepository;
+use Api\Model\OldBaza\Entity\OldBazaRepository;
 use Psr\Http\Message\ResponseInterface;
 use Zend\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class CheckAction implements RequestHandlerInterface
+class GetDataAction implements RequestHandlerInterface
 {
     use WrongUrlExceptionTrait;
 
+    public const LIMIT = 10;
+
     /**
-     * @var NewBazaRepository
+     * @var OldBazaRepository
      */
     private $repo;
 
-    public function __construct(NewBazaRepository $repo)
+    public function __construct(OldBazaRepository $repo)
     {
         $this->repo = $repo;
     }
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $count = 0;
+        $limit = self::LIMIT;
+        if(($query = $request->getQueryParams()) && array_key_exists('limit',$query)){
+            $limit = $query['limit'];
+        }
         $model = $request->getAttribute('model');
         $action = $request->getAttribute('action');
 
         if($model == null && $action == null){
-            $count = $this->repo->CountData();
+            $data = $this->repo->GetData($limit);
         }
 
         if($model && $action == null){
             $this->isModel($model);
-            $count = $this->repo->CountData($model);
+            $data = $this->repo->GetData($limit,$model);
         }
 
         if($model && $action){
             $this->isModel($model);
             $this->isAction($action);
-            $count = $this->repo->CountData($model,$action);
+            $data = $this->repo->GetData($limit,$model,$action);
         }
 
         return new JsonResponse([
-            'count' => $count
+            'data' => $data
         ],200,[],JSON_PRETTY_PRINT);
     }
 }

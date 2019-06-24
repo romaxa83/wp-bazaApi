@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Api\Http\Action\NewBaza;
+namespace Api\Http\Action\OldBaza;
 
 use Api\Http\WrongUrlExceptionTrait;
-use Api\Model\NewBaza\Entity\NewBazaRepository;
+use Api\Model\OldBaza\Entity\OldBazaRepository;
 use Psr\Http\Message\ResponseInterface;
 use Zend\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ServerRequestInterface;
@@ -16,11 +16,11 @@ class CheckAction implements RequestHandlerInterface
     use WrongUrlExceptionTrait;
 
     /**
-     * @var NewBazaRepository
+     * @var OldBazaRepository
      */
     private $repo;
 
-    public function __construct(NewBazaRepository $repo)
+    public function __construct(OldBazaRepository $repo)
     {
         $this->repo = $repo;
     }

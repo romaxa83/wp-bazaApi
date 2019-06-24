@@ -36,4 +36,18 @@ return function (App $app, ContainerInterface $container)
         $this->post('/add/{model}/{action}',Action\NewBaza\AddAction::class . ':handle');
     });
 
+    $app->group('/api/old-baza',function(){
+        $this->get('/check',Action\OldBaza\CheckAction::class . ':handle');
+        $this->get('/check/{model}',Action\OldBaza\CheckAction::class . ':handle');
+        $this->get('/check/{model}/{action}',Action\OldBaza\CheckAction::class . ':handle');
+
+        $this->get('/get-data',Action\OldBaza\GetDataAction::class . ':handle');
+        $this->get('/get-data/{model}',Action\OldBaza\GetDataAction::class . ':handle');
+        $this->get('/get-data/{model}/{action}',Action\OldBaza\GetDataAction::class . ':handle');
+
+        $this->post('/delete',Action\OldBaza\DeleteAction::class . ':handle');
+
+        $this->post('/add/{model}/{action}',Action\OldBaza\AddAction::class . ':handle');
+    });
+
 };

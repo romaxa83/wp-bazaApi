@@ -1,6 +1,6 @@
 <?php
 
-namespace Api\Model\NewBaza\Entity;
+namespace Api\Model\OldBaza\Entity;
 
 use Api\Model\Baza;
 use Doctrine\ORM\Mapping as ORM;
@@ -37,6 +37,22 @@ class OldBaza extends Baza
      * @ORM\Column(type="json")
      */
     private $data;
+
+    public static function create(
+        $model,
+        $action,
+        $time,
+        $data
+    ): self
+    {
+        $baza = new self();
+        $baza->model = $model;
+        $baza->action = $action;
+        $baza->created = $time;
+        $baza->data = $data;
+
+        return $baza;
+    }
 
     /**
      * @return mixed

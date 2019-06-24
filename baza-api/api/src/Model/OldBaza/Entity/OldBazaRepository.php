@@ -1,10 +1,10 @@
 <?php
 
-namespace Api\Model\NewBaza\Entity;
+namespace Api\Model\OldBaza\Entity;
 
 use Doctrine\ORM\EntityManagerInterface;
 
-class NewBazaRepository
+class OldBazaRepository
 {
     /**
      * @var \Doctrine\ORM\EntityRepository
@@ -15,7 +15,7 @@ class NewBazaRepository
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
-        $this->repo = $em->getRepository(NewBaza::class);
+        $this->repo = $em->getRepository(OldBaza::class);
     }
 
     /**
@@ -24,27 +24,27 @@ class NewBazaRepository
     public function CountData($model = null, $action = null)
     {
         if($model && $action == null){
-            return $this->repo->createQueryBuilder('n')
-                ->select('COUNT(n.id)')
-                ->andWhere('n.model = :model')
+            return $this->repo->createQueryBuilder('o')
+                ->select('COUNT(o.id)')
+                ->andWhere('o.model = :model')
                 ->setParameter(':model',$model)
                 ->getQuery()
                 ->getSingleScalarResult();
         }
 
         if($model && $action){
-            return $this->repo->createQueryBuilder('n')
-                ->select('COUNT(n.id)')
-                ->andWhere('n.model = :model')
-                ->andWhere('n.action = :action')
+            return $this->repo->createQueryBuilder('o')
+                ->select('COUNT(o.id)')
+                ->andWhere('o.model = :model')
+                ->andWhere('o.action = :action')
                 ->setParameter(':model',$model)
                 ->setParameter(':action',$action)
                 ->getQuery()
                 ->getSingleScalarResult();
         }
 
-        return $this->repo->createQueryBuilder('n')
-            ->select('COUNT(n.id)')
+        return $this->repo->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
             ->getQuery()
             ->getSingleScalarResult();
     }
@@ -52,9 +52,9 @@ class NewBazaRepository
     public function GetData($limit, $model = null, $action = null)
     {
         if($model && $action == null){
-            return $this->repo->createQueryBuilder('n')
-                ->select('n.id','n.model','n.action','n.data')
-                ->andWhere('n.model = :model')
+            return $this->repo->createQueryBuilder('o')
+                ->select('o.id','o.model','o.action','o.data')
+                ->andWhere('o.model = :model')
                 ->setParameter(':model',$model)
                 ->setMaxResults($limit)
                 ->getQuery()
@@ -62,10 +62,10 @@ class NewBazaRepository
         }
 
         if($model && $action){
-            return $this->repo->createQueryBuilder('n')
-                ->select('n.id','n.model','n.action','n.data')
-                ->andWhere('n.model = :model')
-                ->andWhere('n.action = :action')
+            return $this->repo->createQueryBuilder('o')
+                ->select('o.id','o.model','o.action','o.data')
+                ->andWhere('o.model = :model')
+                ->andWhere('o.action = :action')
                 ->setParameter(':model',$model)
                 ->setParameter(':action',$action)
                 ->setMaxResults($limit)
@@ -73,8 +73,8 @@ class NewBazaRepository
                 ->getResult();
         }
 
-        return $this->repo->createQueryBuilder('n')
-            ->select('n.id','n.model','n.action','n.data')
+        return $this->repo->createQueryBuilder('o')
+            ->select('o.id','o.model','o.action','o.data')
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
@@ -82,9 +82,16 @@ class NewBazaRepository
 
     public function Delete($ids)
     {
-        $this->repo->createQueryBuilder('n')
+//        $this->repo->create
+//        $val = $this->em->getConnection()->createQueryBuilder()
+//            ->delete('baza_old','o')
+//            ->andWhere('o.id IN (:ids)')
+//            ->setParameter(':ids', [2,3,4])
+//            ->execute();
+
+        $this->repo->createQueryBuilder('o')
             ->delete()
-            ->andWhere('n.id IN (:ids)')
+            ->andWhere('o.id IN (:ids)')
             ->setParameter(':ids', $ids)
             ->getQuery()
             ->execute();
