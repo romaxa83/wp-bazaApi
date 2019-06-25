@@ -22,7 +22,7 @@ pgadmin доступно по http://localhost:8081
 подключение к серверу
 - hostname/address - api-postgres
 - port - 5432
-- maintenance - app
+- maintenance - api
 - username - app
 - password - secret
 -------------------------------------
