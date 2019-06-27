@@ -27,12 +27,18 @@ class Command
      * @Assert\NotBlank()
      */
     public $created;
+    
+    /**
+     * @Assert\NotBlank()
+     */
+    public $requestData;
 
-    public function __construct($model,$action,$data)
+    public function __construct($model,$action,$data,$requestData)
     {
         $this->model = $model;
         $this->action = $action;
         $this->data = $data;
+        $this->requestData = $requestData;
         $this->created = time();
     }
 }
