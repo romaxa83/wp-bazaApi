@@ -38,6 +38,11 @@ class NewBaza extends Baza
      */
     private $data;
 
+    /**
+     * @ORM\Column(type="json", name="request_data")
+     */
+    private $requestData;
+
     public static function create(
         $model,
         $action,
@@ -124,5 +129,13 @@ class NewBaza extends Baza
     public function setModel($model)
     {
         $this->model = $model;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRequestData()
+    {
+        return $this->requestData;
     }
 }
