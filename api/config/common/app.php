@@ -40,11 +40,6 @@ return [
         return new Action\HomeAction();
     },
 
-//    Action\NewBaza\CreateAction::class => function(ContainerInterface $container) {
-//        return new Action\NewBaza\CreateAction(
-//            $container->get(Api\Model\NewBaza\UseCase\Add\Handler::class)
-//        );
-//    },
 
     Action\NewBaza\AddAction::class => function(ContainerInterface $container) {
         return new Action\NewBaza\AddAction(

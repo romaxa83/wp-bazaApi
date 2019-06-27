@@ -61,7 +61,7 @@ pgadmin доступно по http://localhost:8081
 
 ##### Получение данных (GET)
 ```sh
-/api/{typeBaza}/get-dat
+/api/{typeBaza}/get-data
 ```
 вернет данные в формате
 ```sh

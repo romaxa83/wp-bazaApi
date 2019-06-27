@@ -10,17 +10,12 @@ use Api\Infrastructure\Framework\Middleware\CallableMiddlewareAdapter as CM;
 
 return function (App $app, ContainerInterface $container)
 {
-     $app->add(new CM($container, Middleware\BodyParamsMiddleware::class));
-     $app->add(new CM($container, Middleware\DomainExceptionMiddleware::class));
-     $app->add(new CM($container, Middleware\ValidationExceptionMiddleware::class));
+    $app->add(new CM($container, Middleware\BodyParamsMiddleware::class));
 
-	 $app->get('/',Action\HomeAction::class . ':handle');
+    $app->add(new CM($container, Middleware\DomainExceptionMiddleware::class));
+    $app->add(new CM($container, Middleware\ValidationExceptionMiddleware::class));
 
-	 $app->group('/api',function(){
-//	     $this->get('',Action\Test\TestAction::class . ':handle');
-//	     $this->post('/create',Action\NewBaza\CreateAction::class . ':handle');
-//	     $this->get('/create',Action\NewBaza\CreateAction::class . ':handle');
-     });
+	$app->get('/',Action\HomeAction::class . ':handle');
 
     $app->group('/api/new-baza',function(){
         $this->get('/check',Action\NewBaza\CheckAction::class . ':handle');

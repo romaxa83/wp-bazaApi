@@ -18,14 +18,17 @@ class Handler
 
     public function handle(Command $command): void
     {
+
         $newBaza = NewBaza::create(
             $command->model,
             $command->action,
             $command->created,
             $command->data
         );
+//        var_dump($newBaza);die();
 
         $this->em->persist($newBaza);
+
         $this->em->flush();
     }
 }

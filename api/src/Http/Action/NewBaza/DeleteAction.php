@@ -30,8 +30,7 @@ class DeleteAction implements RequestHandlerInterface
         $this->repo->Delete($data);
 
         return new JsonResponse([
-            'type' => 'success',
-            'data' => $data
+            'type' => 'success'
         ],200,[],JSON_PRETTY_PRINT);
     }
 }
