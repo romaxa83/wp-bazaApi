@@ -25,7 +25,6 @@ class Handler
             $command->created,
             $command->data
         );
-//        var_dump($newBaza);die();
 
         $this->em->persist($newBaza);
 
