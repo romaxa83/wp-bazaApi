@@ -53,7 +53,7 @@ class NewBazaRepository
     {
         if($model && $action == null){
             return $this->repo->createQueryBuilder('n')
-                ->select('n.id','n.model','n.action','n.data')
+                ->select('n.id','n.model','n.action','n.data','n.request_data')
                 ->andWhere('n.model = :model')
                 ->setParameter(':model',$model)
                 ->setMaxResults($limit)
@@ -63,7 +63,7 @@ class NewBazaRepository
 
         if($model && $action){
             return $this->repo->createQueryBuilder('n')
-                ->select('n.id','n.model','n.action','n.data')
+                ->select('n.id','n.model','n.action','n.data','n.request_data')
                 ->andWhere('n.model = :model')
                 ->andWhere('n.action = :action')
                 ->setParameter(':model',$model)
@@ -74,7 +74,7 @@ class NewBazaRepository
         }
 
         return $this->repo->createQueryBuilder('n')
-            ->select('n.id','n.model','n.action','n.data')
+            ->select('n.id','n.model','n.action','n.data','n.request_data')
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult();

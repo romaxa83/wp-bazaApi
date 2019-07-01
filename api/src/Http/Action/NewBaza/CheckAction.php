@@ -47,7 +47,7 @@ class CheckAction implements RequestHandlerInterface
             $count = $this->repo->CountData($model,$action);
         }
 
-        $this->send('This Trait');
+        $this->send('Check Data');
 
         return new JsonResponse([
             'count' => $count

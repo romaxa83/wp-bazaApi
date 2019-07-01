@@ -47,7 +47,8 @@ class NewBaza extends Baza
         $model,
         $action,
         $time,
-        $data
+        $data,
+        $requestData
     ): self
     {
         $baza = new self();
@@ -55,6 +56,7 @@ class NewBaza extends Baza
         $baza->action = $action;
         $baza->created = $time;
         $baza->data = $data;
+        $baza->requestData = $requestData;
 
         return $baza;
     }

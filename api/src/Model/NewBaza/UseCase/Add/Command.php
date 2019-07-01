@@ -23,6 +23,8 @@ class Command
      */
     public $data;
 
+    public $requestData;
+
     /**
      * @Assert\NotBlank()
      */
@@ -32,7 +34,8 @@ class Command
     {
         $this->model = $model;
         $this->action = $action;
-        $this->data = $data;
+        $this->data = $data['data'];
+        $this->requestData = $data['requestData'];
         $this->created = time();
     }
 }

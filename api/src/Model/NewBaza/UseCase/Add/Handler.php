@@ -23,7 +23,8 @@ class Handler
             $command->model,
             $command->action,
             $command->created,
-            $command->data
+            $command->data,
+            $command->requestData
         );
 
         $this->em->persist($newBaza);
