@@ -47,7 +47,8 @@ class OldBaza extends Baza
         $model,
         $action,
         $time,
-        $data
+        $data,
+        $requestData  
     ): self
     {
         $baza = new self();
@@ -55,7 +56,8 @@ class OldBaza extends Baza
         $baza->action = $action;
         $baza->created = $time;
         $baza->data = $data;
-
+        $baza->requestData = $requestData;
+//        var_dump($baza);die();
         return $baza;
     }
 
