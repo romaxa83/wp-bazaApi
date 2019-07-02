@@ -82,13 +82,6 @@ class OldBazaRepository
 
     public function Delete($ids)
     {
-//        $this->repo->create
-//        $val = $this->em->getConnection()->createQueryBuilder()
-//            ->delete('baza_old','o')
-//            ->andWhere('o.id IN (:ids)')
-//            ->setParameter(':ids', [2,3,4])
-//            ->execute();
-
         $this->repo->createQueryBuilder('o')
             ->delete()
             ->andWhere('o.id IN (:ids)')

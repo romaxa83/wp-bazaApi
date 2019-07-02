@@ -57,7 +57,7 @@ class OldBaza extends Baza
         $baza->created = $time;
         $baza->data = $data;
         $baza->requestData = $requestData;
-//        var_dump($baza);die();
+
         return $baza;
     }
 

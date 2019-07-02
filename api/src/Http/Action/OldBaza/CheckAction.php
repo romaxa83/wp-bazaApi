@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Api\Http\Action\OldBaza;
 
+use Api\Http\TelegramTrait;
 use Api\Http\WrongUrlExceptionTrait;
 use Api\Model\OldBaza\Entity\OldBazaRepository;
 use Psr\Http\Message\ResponseInterface;
@@ -13,7 +14,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class CheckAction implements RequestHandlerInterface
 {
-    use WrongUrlExceptionTrait;
+    use WrongUrlExceptionTrait,TelegramTrait;
 
     /**
      * @var OldBazaRepository
@@ -45,6 +46,8 @@ class CheckAction implements RequestHandlerInterface
             $this->isAction($action);
             $count = $this->repo->CountData($model,$action);
         }
+
+        $this->send('Count - ' . $count);
 
         return new JsonResponse([
             'count' => $count

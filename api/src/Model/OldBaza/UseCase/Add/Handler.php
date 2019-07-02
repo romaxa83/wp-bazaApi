@@ -27,6 +27,7 @@ class Handler
         );
         
         $this->em->persist($oldBaza);
+
         $this->em->flush();
     }
 }
