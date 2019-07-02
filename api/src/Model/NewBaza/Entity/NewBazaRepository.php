@@ -57,6 +57,7 @@ class NewBazaRepository
                 ->andWhere('n.model = :model')
                 ->setParameter(':model',$model)
                 ->setMaxResults($limit)
+                ->orderBy('o.id', 'ASC')
                 ->getQuery()
                 ->getResult();
         }
@@ -69,6 +70,7 @@ class NewBazaRepository
                 ->setParameter(':model',$model)
                 ->setParameter(':action',$action)
                 ->setMaxResults($limit)
+                ->orderBy('o.id', 'ASC')
                 ->getQuery()
                 ->getResult();
         }
@@ -76,6 +78,7 @@ class NewBazaRepository
         return $this->repo->createQueryBuilder('n')
             ->select('n.id','n.model','n.action','n.data','n.request_data')
             ->setMaxResults($limit)
+            ->orderBy('o.id', 'ASC')
             ->getQuery()
             ->getResult();
     }
