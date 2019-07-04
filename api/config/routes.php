@@ -17,6 +17,8 @@ return function (App $app, ContainerInterface $container)
 
 	$app->get('/',Action\HomeAction::class . ':handle');
 
+	$app->post('/api/telegram', Action\TelegramAction::class . ':handle');
+
     $app->group('/api/new-baza',function(){
         $this->get('/check',Action\NewBaza\CheckAction::class . ':handle');
         $this->get('/check/{model}',Action\NewBaza\CheckAction::class . ':handle');

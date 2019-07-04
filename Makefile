@@ -1,4 +1,7 @@
-init: docker-down docker-up api-permissions composer-install doctrine-migrate
+init: docker-down docker-up api-permissions composer-install doctrine-migrate cp-env
+
+cp-env:
+	cp api/.env.example api/.env
 
 docker-up:
 	docker-compose up --build -d

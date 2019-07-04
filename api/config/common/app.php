@@ -40,6 +40,10 @@ return [
         return new Action\HomeAction();
     },
 
+    Action\TelegramAction::class => function () {
+        return new Action\TelegramAction();
+    },
+
 
     Action\NewBaza\AddAction::class => function(ContainerInterface $container) {
         return new Action\NewBaza\AddAction(

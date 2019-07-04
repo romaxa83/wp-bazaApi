@@ -102,3 +102,18 @@ pgadmin доступно по http://localhost:8081
 /api/{typeBaza}/delete
 ```
 в массиве передаються id - удаляемых данных
+
+##### Отправка ошибки для telegram (POST)
+```sh
+/api/telegram
+```
+
+данные отправляються в формате
+```sh
+[
+    'type' => 'error',
+    'message' => 'some message'
+]
+```
+
+при успехе вернет status 200
