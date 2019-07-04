@@ -34,7 +34,7 @@ class AddAction implements RequestHandlerInterface
         $this->isModel($model);
         $this->isAction($action);
 
-        $command = new Command($model, $action, $data['data'], $data['request_data']);
+        $command = new Command($model, $action, $data['data'], $data['requestData']);
 
         $this->handler->handle($command);
 
