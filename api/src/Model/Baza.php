@@ -13,12 +13,14 @@ class Baza
     public const MODEL_REQUEST = 'request';
     public const MODEL_PRODUCT = 'product';
     public const MODEL_TRANSACTION = 'transaction';
+    public const MODEL_TRANSACTION_PRODUCT = 'transaction-product';
 
     public function isModel($model): bool
     {
         return self::MODEL_PRODUCT === $model
             || self::MODEL_TRANSACTION === $model
-            || self::MODEL_REQUEST === $model;
+            || self::MODEL_REQUEST === $model
+            || self::MODEL_TRANSACTION_PRODUCT === $model;
     }
 
     public function isAction($action): bool

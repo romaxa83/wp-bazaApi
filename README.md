@@ -37,10 +37,11 @@ pgadmin доступно по http://localhost:8081
     - new-baza
     - old-baza
  
- - {model} - к какой сущности относяться данные,имеет три значения
+ - {model} - к какой сущности относяться данные,имеет четыри значения
     - request
     - product
     - transaction
+    - transaction-product
  - {action} - к каким действиям относяться данные,имеет три значения
      - create
      - update
