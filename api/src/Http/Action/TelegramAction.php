@@ -35,7 +35,7 @@ class TelegramAction implements RequestHandlerInterface
 
     private function isError($data)
     {
-        return isset($data['status']) && $data['status'] == 'error';
+        return isset($data['status']) && !(empty($data['status']));
     }
 
     private function isMessage($data)
