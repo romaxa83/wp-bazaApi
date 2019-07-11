@@ -10,11 +10,14 @@ services:
             - api-php-fpm
         networks:
             - frontend
-        labels:
-            - 'traefik.backend=nginx'
-            - 'traefik.frontend.rule=Host:127.0.0.1'
-            - 'traefik.docker.network=frontend'
-            - 'traefik.port=80'
+        ports:
+            - "8080:80"
+
+#        labels:221,6
+#            - 'traefik.backend=nginx'
+#            - 'traefik.frontend.rule=Host:127.0.0.1'
+#            - 'traefik.docker.network=frontend'
+#            - 'traefik.port=80'
 
 
     api-php-fpm:
