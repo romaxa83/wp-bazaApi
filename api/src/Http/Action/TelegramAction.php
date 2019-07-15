@@ -18,8 +18,8 @@ class TelegramAction implements RequestHandlerInterface
     {
         $data = $request->getParsedBody();
 
-        if($this->isError($data) && $this->isMessage($data)){
-            $this->send($data['message']);
+        if($this->isFull($data,'status') && $this->isFull($data,'message')){
+            $this->send($data['message'] . PHP_EOL . $data['status']);
 
             return new JsonResponse([
                 'type' => 'success'
@@ -32,14 +32,9 @@ class TelegramAction implements RequestHandlerInterface
         ],500,[],JSON_PRETTY_PRINT);
 
     }
-
-    private function isError($data)
+    
+    private function isFull($data,$key)
     {
-        return isset($data['status']) && $data['status'] == 'error';
-    }
-
-    private function isMessage($data)
-    {
-        return isset($data['message']) && !(empty($data['message']));
+        return isset($data[$key]) && !(empty($data[$key]));    
     }
 }
