@@ -69,6 +69,12 @@ return [
         );
     },
 
+    Action\NewBaza\ClearAction::class => function(ContainerInterface $container) {
+        return new Action\NewBaza\ClearAction(
+            $container->get(NewBazaRepository::class)
+        );
+    },
+
     Action\OldBaza\AddAction::class => function(ContainerInterface $container) {
         return new Action\OldBaza\AddAction(
             $container->get(Api\Model\OldBaza\UseCase\Add\Handler::class)
@@ -89,8 +95,13 @@ return [
 
     Action\OldBaza\DeleteAction::class => function(ContainerInterface $container) {
         return new Action\OldBaza\DeleteAction(
+            $container->get(Api\Model\OldBaza\UseCase\Delete\Handler::class)
+        );
+    },
+
+    Action\OldBaza\ClearAction::class => function(ContainerInterface $container) {
+        return new Action\OldBaza\ClearAction(
             $container->get(OldBazaRepository::class)
         );
-    }
-
+    },
 ];

@@ -18,6 +18,14 @@ class OldBazaRepository
         $this->repo = $em->getRepository(OldBaza::class);
     }
 
+    public function get($id)
+    {
+        if($data = $this->repo->find($id)){
+            return $data;
+        }
+        throw new \Exception('Not found data by id '.$id);
+    }
+
     /**
      * @return mixed
      */
@@ -27,7 +35,9 @@ class OldBazaRepository
             return $this->repo->createQueryBuilder('o')
                 ->select('COUNT(o.id)')
                 ->andWhere('o.model = :model')
+                ->andWhere('o.status = :status')
                 ->setParameter(':model',$model)
+                ->setParameter(':status',OldBaza::STATUS_ACTIVE)
                 ->getQuery()
                 ->getSingleScalarResult();
         }
@@ -37,14 +47,18 @@ class OldBazaRepository
                 ->select('COUNT(o.id)')
                 ->andWhere('o.model = :model')
                 ->andWhere('o.action = :action')
+                ->andWhere('o.status = :status')
                 ->setParameter(':model',$model)
                 ->setParameter(':action',$action)
+                ->setParameter(':status',OldBaza::STATUS_ACTIVE)
                 ->getQuery()
                 ->getSingleScalarResult();
         }
 
         return $this->repo->createQueryBuilder('o')
             ->select('COUNT(o.id)')
+            ->andWhere('o.status = :status')
+            ->setParameter(':status',OldBaza::STATUS_ACTIVE)
             ->getQuery()
             ->getSingleScalarResult();
     }
@@ -53,9 +67,11 @@ class OldBazaRepository
     {
         if($model && $action == null){
             return $this->repo->createQueryBuilder('o')
-                ->select('o.id','o.model','o.action','o.data','o.requestData')
+                ->select('o.id','o.model','o.action','o.data','o.requestData','o.status')
                 ->andWhere('o.model = :model')
+                ->andWhere('o.status = :status')
                 ->setParameter(':model',$model)
+                ->setParameter(':status',OldBaza::STATUS_ACTIVE)
                 ->setMaxResults($limit)
                 ->orderBy('o.id', 'ASC')
                 ->getQuery()
@@ -64,11 +80,13 @@ class OldBazaRepository
 
         if($model && $action){
             return $this->repo->createQueryBuilder('o')
-                ->select('o.id','o.model','o.action','o.data','o.requestData')
+                ->select('o.id','o.model','o.action','o.data','o.requestData','o.status')
                 ->andWhere('o.model = :model')
                 ->andWhere('o.action = :action')
+                ->andWhere('o.status = :status')
                 ->setParameter(':model',$model)
                 ->setParameter(':action',$action)
+                ->setParameter(':status',OldBaza::STATUS_ACTIVE)
                 ->setMaxResults($limit)
                 ->orderBy('o.id', 'ASC')
                 ->getQuery()
@@ -76,19 +94,31 @@ class OldBazaRepository
         }
 
         return $this->repo->createQueryBuilder('o')
-            ->select('o.id','o.model','o.action','o.data','o.requestData')
+            ->select('o.id','o.model','o.action','o.data','o.requestData','o.status')
+            ->andWhere('o.status = :status')
+            ->setParameter(':status',OldBaza::STATUS_ACTIVE)
             ->setMaxResults($limit)
             ->orderBy('o.id', 'ASC')
             ->getQuery()
             ->getResult();
     }
 
-    public function Delete($ids)
+//    public function Delete($ids)
+//    {
+//        $this->repo->createQueryBuilder('o')
+//            ->delete()
+//            ->andWhere('o.id IN (:ids)')
+//            ->setParameter(':ids', $ids)
+//            ->getQuery()
+//            ->execute();
+//    }
+
+    public function Clear()
     {
         $this->repo->createQueryBuilder('o')
             ->delete()
-            ->andWhere('o.id IN (:ids)')
-            ->setParameter(':ids', $ids)
+            ->andWhere('o.status = :status')
+            ->setParameter(':status',OldBaza::STATUS_DELETE)
             ->getQuery()
             ->execute();
     }

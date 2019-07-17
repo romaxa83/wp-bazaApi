@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Api\Http\Action\OldBaza;
 
-use Api\Model\OldBaza\Entity\OldBazaRepository;
+use Api\Model\OldBaza\UseCase\Delete\Command;
+use Api\Model\OldBaza\UseCase\Delete\Handler;
 use Psr\Http\Message\ResponseInterface;
 use Zend\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ServerRequestInterface;
@@ -13,25 +14,32 @@ use Psr\Http\Server\RequestHandlerInterface;
 class DeleteAction implements RequestHandlerInterface
 {
     /**
-     * @var OldBazaRepository
+     * @var Handler
      */
-    private $repo;
+    private $handler;
 
-    public function __construct(OldBazaRepository $repo)
+    public function __construct(Handler $handler)
     {
-
-        $this->repo = $repo;
+        $this->handler = $handler;
     }
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $data = $request->getParsedBody();
+        $id = $request->getParsedBody()['id'];
+        $command = new Command($id);
 
-        $this->repo->Delete($data);
+        try {
+            $this->handler->handle($command);
 
-        return new JsonResponse([
-            'type' => 'success',
-            'data' => $data
-        ],200,[],JSON_PRETTY_PRINT);
+            return new JsonResponse([
+                'type' => 'success'
+            ],200,[],JSON_PRETTY_PRINT);
+        } catch (\Exception $e) {
+
+            return new JsonResponse([
+                'type' => 'error',
+                'message' => $e->getMessage()
+            ],500,[],JSON_PRETTY_PRINT);
+        }
     }
 }

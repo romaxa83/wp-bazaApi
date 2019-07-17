@@ -6,6 +6,9 @@ namespace Api\Model;
 
 class Baza
 {
+    public const STATUS_ACTIVE = 1;
+    public const STATUS_DELETE = 0;
+
     public const ACTION_CREATE = 'create';
     public const ACTION_UPDATE = 'update';
     public const ACTION_DELETE = 'delete';

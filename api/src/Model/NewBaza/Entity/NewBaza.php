@@ -43,6 +43,11 @@ class NewBaza extends Baza
      */
     private $requestData;
 
+    /**
+     * @ORM\Column(type="smallint", name="status", options={"default:1"})
+     */
+    private $status;
+
     public static function create(
         $model,
         $action,
@@ -59,6 +64,15 @@ class NewBaza extends Baza
         $baza->requestData = $requestData;
 
         return $baza;
+    }
+
+    public function changeStatus()
+    {
+        if($this->isActive()) {
+            $this->status = self::STATUS_DELETE;
+        }
+
+        throw new \Exception('Status delete is already');
     }
 
     /**
@@ -139,5 +153,23 @@ class NewBaza extends Baza
     public function getRequestData()
     {
         return $this->requestData;
+    }
+
+    /**
+     * @param mixed $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    public function isActive(): bool
+    {
+        return $this->status === self::STATUS_ACTIVE;
+    }
+
+    public function isDelete(): bool
+    {
+        return $this->status === self::STATUS_DELETE;
     }
 }

@@ -30,6 +30,8 @@ return function (App $app, ContainerInterface $container)
 
         $this->post('/delete',Action\NewBaza\DeleteAction::class . ':handle');
 
+        $this->get('/clear',Action\NewBaza\ClearAction::class . ':handle');
+
         $this->post('/add/{model}/{action}',Action\NewBaza\AddAction::class . ':handle');
     });
 
@@ -43,6 +45,8 @@ return function (App $app, ContainerInterface $container)
         $this->get('/get-data/{model}/{action}',Action\OldBaza\GetDataAction::class . ':handle');
 
         $this->post('/delete',Action\OldBaza\DeleteAction::class . ':handle');
+
+        $this->get('/clear',Action\OldBaza\ClearAction::class . ':handle');
 
         $this->post('/add/{model}/{action}',Action\OldBaza\AddAction::class . ':handle');
     });

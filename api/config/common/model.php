@@ -15,9 +15,23 @@ return [
         );
     },
 
+    NewBaza\UseCase\Delete\Handler::class => function(ContainerInterface $container){
+        return new NewBaza\UseCase\Delete\Handler(
+            $container->get(Doctrine\ORM\EntityManagerInterface::class),
+            $container->get(NewBaza\Entity\NewBazaRepository::class)
+        );
+    },
+
     OldBaza\UseCase\Add\Handler::class => function(ContainerInterface $container){
         return new OldBaza\UseCase\Add\Handler(
             $container->get(Doctrine\ORM\EntityManagerInterface::class)
+        );
+    },
+
+    OldBaza\UseCase\Delete\Handler::class => function(ContainerInterface $container){
+        return new OldBaza\UseCase\Delete\Handler(
+            $container->get(Doctrine\ORM\EntityManagerInterface::class),
+            $container->get(OldBaza\Entity\OldBazaRepository::class)
         );
     },
 
