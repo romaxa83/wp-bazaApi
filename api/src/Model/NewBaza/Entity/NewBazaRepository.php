@@ -55,6 +55,15 @@ class NewBazaRepository
                 ->getSingleScalarResult();
         }
 
+//        $qb = $this->repo->createQueryBuilder('n')
+//            ->select('COUNT(n.id)')
+//            ->andWhere('n.status = :status')
+//            ->setParameter(':status',NewBaza::STATUS_ACTIVE)
+//            ->getQuery();
+////            ->getSingleScalarResult();
+//
+//        var_dump($qb->getSQL());die();
+
         return $this->repo->createQueryBuilder('n')
             ->select('COUNT(n.id)')
             ->andWhere('n.status = :status')

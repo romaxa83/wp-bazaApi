@@ -63,6 +63,7 @@ class NewBaza extends Baza
         $baza->data = $data;
         $baza->requestData = $requestData;
 
+
         return $baza;
     }
 

@@ -62,6 +62,7 @@ class OldBaza extends Baza
         $baza->created = $time;
         $baza->data = $data;
         $baza->requestData = $requestData;
+        $baza->status = self::STATUS_ACTIVE;
 
         return $baza;
     }
