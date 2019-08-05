@@ -65,7 +65,7 @@ return [
 
     Action\NewBaza\DeleteAction::class => function(ContainerInterface $container) {
         return new Action\NewBaza\DeleteAction(
-            $container->get(NewBazaRepository::class)
+            $container->get(Api\Model\NewBaza\UseCase\Delete\Handler::class)
         );
     },
 
