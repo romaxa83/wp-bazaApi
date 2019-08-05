@@ -64,6 +64,7 @@ class NewBaza extends Baza
         $baza->requestData = $requestData;
         $baza->status = self::STATUS_ACTIVE;
 
+
         return $baza;
     }
 
