@@ -70,11 +70,11 @@ class NewBaza extends Baza
 
     public function changeStatus()
     {
-        if($this->isActive()) {
-            $this->status = self::STATUS_DELETE;
+        if($this->isDelete()) {
+            throw new \Exception('Status delete is already');
         }
 
-        throw new \Exception('Status delete is already');
+        $this->status = self::STATUS_DELETE;
     }
 
     /**
