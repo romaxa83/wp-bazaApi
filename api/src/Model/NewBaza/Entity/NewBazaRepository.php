@@ -76,20 +76,20 @@ class NewBazaRepository
     {
         if($model && $action == null){
             return $this->repo->createQueryBuilder('n')
-                ->select('n.id','n.model','n.action','n.data','n.request_data')
+                ->select('n.id','n.model','n.action','n.data','n.requestData')
                 ->andWhere('n.model = :model')
                 ->andWhere('n.status = :status')
                 ->setParameter(':model',$model)
                 ->setParameter(':status',NewBaza::STATUS_ACTIVE)
                 ->setMaxResults($limit)
-                ->orderBy('o.id', 'ASC')
+                ->orderBy('n.id', 'ASC')
                 ->getQuery()
                 ->getResult();
         }
 
         if($model && $action){
             return $this->repo->createQueryBuilder('n')
-                ->select('n.id','n.model','n.action','n.data','n.request_data')
+                ->select('n.id','n.model','n.action','n.data','n.requestData')
                 ->andWhere('n.model = :model')
                 ->andWhere('n.action = :action')
                 ->setParameter(':status',NewBaza::STATUS_ACTIVE)
@@ -97,17 +97,17 @@ class NewBazaRepository
                 ->setParameter(':action',$action)
                 ->setParameter(':status',NewBaza::STATUS_ACTIVE)
                 ->setMaxResults($limit)
-                ->orderBy('o.id', 'ASC')
+                ->orderBy('n.id', 'ASC')
                 ->getQuery()
                 ->getResult();
         }
 
         return $this->repo->createQueryBuilder('n')
-            ->select('n.id','n.model','n.action','n.data','n.request_data')
+            ->select('n.id','n.model','n.action','n.data','n.requestData')
             ->andWhere('n.status = :status')
             ->setParameter(':status',NewBaza::STATUS_ACTIVE)
             ->setMaxResults($limit)
-            ->orderBy('o.id', 'ASC')
+            ->orderBy('n.id', 'ASC')
             ->getQuery()
             ->getResult();
     }
