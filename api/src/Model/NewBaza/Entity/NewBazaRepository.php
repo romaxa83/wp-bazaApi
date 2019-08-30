@@ -127,6 +127,7 @@ class NewBazaRepository
         $this->repo->createQueryBuilder('n')
             ->delete()
             ->andWhere('n.status = :status')
+            ->andWhere('n.created >= '.strtotime('+3 day', time()))
             ->setParameter(':status',NewBaza::STATUS_DELETE)
             ->getQuery()
             ->execute();

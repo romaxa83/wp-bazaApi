@@ -118,6 +118,7 @@ class OldBazaRepository
         $this->repo->createQueryBuilder('o')
             ->delete()
             ->andWhere('o.status = :status')
+            ->andWhere('o.created >= '.strtotime('+3 day', time()))
             ->setParameter(':status',OldBaza::STATUS_DELETE)
             ->getQuery()
             ->execute();
