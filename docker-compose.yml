@@ -10,6 +10,9 @@ services:
             - php
         networks:
             - frontend
+            - backend
+        ports:
+            - "81:80"
         labels:
             - "traefik.backend=nginx"
             - "traefik.frontend.rule=Host:${DOMAIN}"
@@ -30,7 +33,7 @@ services:
         depends_on:
             - api-postgres
         networks:
-            - frontend
+            - backend
         labels:
             - "traefik.enable=false"
         logging:
@@ -47,10 +50,15 @@ services:
             - "POSTGRES_USER=app"
             - "POSTGRES_PASSWORD=secret"
             - "POSTGRES_DB=api"
-        ports:
-            - "54321:5432"
         networks:
-            - frontend
+            - backend
+        labels:
+            - "traefik.enable=false"
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "50m"
+                max-file: "3"
 
     pgadmin:
         image: dpage/pgadmin4
@@ -58,13 +66,14 @@ services:
             - api-postgres
         networks:
             - frontend
+            - backend
         environment:
             PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
             PGADMIN_DEFAULT_PASSWORD: admin
         restart: unless-stopped
         labels:
             - "traefik.backend=pgadmin"
-            - "traefik.frontend.rule=Host:gdadmin.${DOMAIN}"
+            - "traefik.frontend.rule=Host:pgadmin.${DOMAIN}"
             - "traefik.docker.network=frontend"
             - "traefik.port=80"
         logging:
@@ -76,3 +85,5 @@ services:
 networks:
     frontend:
         external: true
+    backend:
+        external: false
