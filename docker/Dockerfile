@@ -1,8 +1,10 @@
 FROM php:7.1-fpm
 
-RUN apt-get update && apt-get install -y libmcrypt-dev libpq-dev ffmpeg \
+RUN apt-get update && apt-get install -y libmcrypt-dev zlib1g-dev libpq-dev wget ffmpeg \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
-    && docker-php-ext-install mcrypt pdo_pgsql pgsql bcmath
+    && docker-php-ext-install mcrypt pdo_pgsql pgsql bcmath zip git
+
+RUN wget https://getcomposer.org/installer -O - -q | php -- --install-dir=/bin --filename=composer --quiet
 
 ADD ./php/default.ini /usr/local/etc/php/conf.d/default.ini
 

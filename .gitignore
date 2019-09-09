@@ -4,5 +4,6 @@ api/.env
 api/composer.lock
 
 .idea
+.env
 
 nbproject
