@@ -1,24 +1,21 @@
-version: '3'
+version: "3"
 services:
     nginx:
-        build:
-            context: ./api/docker
-            dockerfile: nginx.docker
+        image: nginx:1.10
         volumes:
-            -  ./api:/var/www/api
+            - ./api:/var/www/api
+            - ./config/nginx/default.conf:/etc/nginx/conf.d/default.conf
         depends_on:
             - api-php-fpm
         networks:
             - frontend
         ports:
             - "8080:80"
-
-#        labels:221,6
-#            - 'traefik.backend=nginx'
-#            - 'traefik.frontend.rule=Host:127.0.0.1'
-#            - 'traefik.docker.network=frontend'
-#            - 'traefik.port=80'
-
+        labels:
+            - "traefik.backend=nginx"
+            - "traefik.frontend.rule=Host:${DOMAIN}"
+            - "traefik.docker.network=frontend"
+            - "traefik.port=80"
 
     api-php-fpm:
         build:
@@ -40,7 +37,7 @@ services:
         depends_on:
             - api-postgres
         working_dir: /var/www/api
-        tty: true 
+        tty: true
         networks:
             - frontend
 
@@ -56,18 +53,20 @@ services:
             - "54321:5432"
         networks:
             - frontend
+
     pgadmin:
         image: dpage/pgadmin4
         depends_on:
             - api-postgres
         ports:
-          - "8081:80"
+            - "8081:80"
         networks:
-          - frontend
+            - frontend
         environment:
             PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
             PGADMIN_DEFAULT_PASSWORD: admin
         restart: unless-stopped
+
 networks:
-  frontend:
-    external: true
+    frontend:
+        external: true
